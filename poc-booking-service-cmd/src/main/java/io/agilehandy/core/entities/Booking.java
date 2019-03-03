@@ -246,8 +246,6 @@ public class Booking {
 	public Booking legAdded(LegAddedEvent event) {
 		Cargo cargo = this.cargoMember(UUID.fromString(event.getCargoId()));
 		Route route = cargo.getRoute();
-		if (route == null) log.info("===> route is null");////
-		else log.info("route is NOT null");////////
 		route.legAdded(event);
 		this.cacheEvent(event);
 		return this;

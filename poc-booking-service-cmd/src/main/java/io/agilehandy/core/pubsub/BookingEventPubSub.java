@@ -61,9 +61,7 @@ public class BookingEventPubSub {
 				.setHeader(KafkaHeaders.MESSAGE_KEY, event.getBookingId().getBytes())
 				.setHeader(HEADER_EVENT_TYPE, event.getType())
 				.build();
-		log.info("start publishing create booking event..");
 		channels.output().send(message);
-		log.info("finish publishing create booking event..");
 	}
 
 	// Kafka KTable of aggregates snapshot

@@ -48,7 +48,7 @@ public class BookingRepository {
 
 	public void save(Booking booking) {
 		booking.getCache().stream().forEach(e -> {
-			log.info(String.format("publishing [bookingId: %s, eventType: %s]"
+			log.debug(String.format("publishing [bookingId: %s, eventType: %s]"
 					, e.getBookingId(), e.getType()));
 			pubsub.publish(e);
 		});
