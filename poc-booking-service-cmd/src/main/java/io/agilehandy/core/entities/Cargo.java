@@ -41,24 +41,24 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Cargo {
 
-	UUID id;
+	private UUID id;
 
 	@JsonIgnore
-	UUID bookingId;
+	private UUID bookingId;
 
-	CargoNature nature;
-	ContainerSize requiredSize;
-	ContainerSize assignedSize;
+	private CargoNature nature;
+	private ContainerSize requiredSize;
+	private ContainerSize assignedSize;
 
-	Location origin;
-	Location destination;
+	private Location origin;
+	private Location destination;
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-	LocalDateTime cutOffDate;
+	private LocalDateTime cutOffDate;
 
-	Route route;
+	private Route route;
 
 	public Cargo(UUID cargoId) {
 		this.id = cargoId;

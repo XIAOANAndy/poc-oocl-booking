@@ -40,20 +40,20 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Leg {
 
-	UUID id;
+	private UUID id;
 
 	@JsonIgnore
-	UUID bookingId;
+	private UUID bookingId;
 
 	@JsonIgnore
-	UUID cargoId;
+	private UUID cargoId;
 
 	@JsonIgnore
-	UUID routeId;
+	private UUID routeId;
 
-	Location startLocation;
-	Location endLocation;
-	TransportationType transType;
+	private Location startLocation;
+	private Location endLocation;
+	private TransportationType transType;
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -63,7 +63,7 @@ public class Leg {
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-	LocalDateTime dropOffTime;
+	private LocalDateTime dropOffTime;
 
 	public Leg(UUID legId) {
 		this.id = legId;

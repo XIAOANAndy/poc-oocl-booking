@@ -60,14 +60,15 @@ public class Booking {
 	@JsonIgnore
 	private List<BookingEvent> cache = new ArrayList<>();
 
-	UUID id;
+	private UUID id;
 
-	UUID customerId;
+	private UUID customerId;
 
-	List<Cargo> cargoList;
+	private List<Cargo> cargoList;
 
 	public Booking() {}
 
+	// Command Handler
 	public Booking(BookingCreateCommand cmd) {
 		// TODO: perform any invariant rules here
 		UUID bookingId = UUID.randomUUID();
@@ -114,6 +115,7 @@ public class Booking {
 		return this;
 	}
 
+	// Command Handler
 	public UUID addCargo(CargoAddCommand cmd) {
 		// TODO: perform any invariant rules here
 		UUID cargoId = UUID.randomUUID();
@@ -155,7 +157,7 @@ public class Booking {
 				.forEach(routeAddCommand -> this.addRoute(routeAddCommand));
 	}
 
-	public List<RouteLeg> findRouteLegs(Location origin, Location destination) {
+	private List<RouteLeg> findRouteLegs(Location origin, Location destination) {
 		// TODO: call external service to get legs for a route
 		// for this demo generate random route legs
 		int numberOfLegs = 0;
@@ -183,6 +185,7 @@ public class Booking {
 		return legs;
 	}
 
+	// Command Handler
 	public UUID addRoute(RouteAddCommand cmd) {
 		// TODO: perform any invariant rules here
 		UUID routeId = UUID.randomUUID();
@@ -216,7 +219,7 @@ public class Booking {
 		return routeId;
 	}
 
-	// EVENT SOURCE HANDLER
+	// Event Source Handler
 	public Booking routeAdded(RouteAddedEvent event) {
 		Cargo cargo = this.cargoMember(UUID.fromString(event.getCargoId()));
 		cargo.setRoute(new Route());
@@ -225,6 +228,7 @@ public class Booking {
 		return this;
 	}
 
+	// Command Handler
 	public UUID addLeg(LegAddCommand cmd) {
 		// TODO: perform any invariant rules here
 		UUID legId = UUID.randomUUID();
@@ -242,7 +246,7 @@ public class Booking {
 		return legId;
 	}
 
-	// EVENT SOURCE HANDLER
+	// Event Source Handler
 	public Booking legAdded(LegAddedEvent event) {
 		Cargo cargo = this.cargoMember(UUID.fromString(event.getCargoId()));
 		Route route = cargo.getRoute();
@@ -251,6 +255,7 @@ public class Booking {
 		return this;
 	}
 
+	// Replaying Event Sourcing Handler
 	public Booking handleEvent(BookingEvent event) {
 		return API.Match(event).of(
 				Case( $( instanceOf( BookingCreatedEvent.class ) ), this::bookingCreated)

@@ -36,18 +36,18 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Route {
 
-	UUID id;
+	private UUID id;
 
 	@JsonIgnore
-	UUID bookingId;
+	private UUID bookingId;
 
 	@JsonIgnore
-	UUID cargoId;
+	private UUID cargoId;
 
-	Location origin;
-	Location destination;
+	private Location origin;
+	private Location destination;
 
-	List<Leg> legList;
+	private List<Leg> legList;
 
 	public Route(UUID routeId) {
 		this.id = routeId;
