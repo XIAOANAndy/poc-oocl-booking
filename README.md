@@ -67,7 +67,7 @@ project data views and serve to query these views.
  bin/kafka-server-start.sh config/server.properties
  ``` 
 
-## Run the POD Locally
+## Run the Project Locally
 
 * Clone this project.
 
