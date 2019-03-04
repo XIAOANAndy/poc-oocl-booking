@@ -293,7 +293,7 @@ public class Booking {
 
 	public Leg getLeg(UUID cargoId, UUID legId) {
 		Route route = this.getRoute(cargoId);
-		return route.getLegList().stream().filter(l -> l.id.toString().equals(legId.toString()))
+		return route.getLegList().stream().filter(l -> l.getId().toString().equals(legId.toString()))
 				.findFirst()
 				.orElseThrow(() ->
 						new LegNotFoundException(String.format(
